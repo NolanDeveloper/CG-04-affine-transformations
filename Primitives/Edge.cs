@@ -45,9 +45,7 @@ namespace affine_transformations.Primitives
             var dx = B.X - A.X;
             var dy = B.Y - A.Y;
             var n = (float)Math.Sqrt(dy * dy + dx * dx);
-            dx /= n;
-            dy /= n;
-            return dx * point.Y - dy * point.X - dx * A.Y + dy * A.X;
+            return (dx * point.Y - dy * point.X - dx * A.Y + dy * A.X) / n;
         }
     }
 }
