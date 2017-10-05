@@ -116,5 +116,20 @@ namespace affine_transformations
             selectedPrimitive = (Primitive)e.Node.Tag;
             Redraw();
         }
+
+        private void treeView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keys.Delete != e.KeyCode) return;
+            if (null == selectedPrimitive) return;
+            if (selectedPrimitive is Point2D) points.Remove((Point2D)selectedPrimitive);
+            if (selectedPrimitive is Edge) edges.Remove((Edge)selectedPrimitive);
+            if (selectedPrimitive is Polygon) polygons.Remove((Polygon)selectedPrimitive);
+            treeView1.SelectedNode.Remove();
+            if (null != treeView1.SelectedNode)
+                selectedPrimitive = (Primitive)treeView1.SelectedNode.Tag;
+            else
+                selectedPrimitive = null;
+            Redraw();
+        }
     }
 }
