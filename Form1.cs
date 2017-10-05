@@ -91,25 +91,24 @@ namespace affine_transformations
 
         private void TransformAll(Transformation t)
         {
-            points.ForEach((p) => p.Apply(t));
-            edges.ForEach((e) => e.Apply(t));
-            polygons.ForEach((p) => p.Apply(t));
+            if (null == selectedPrimitive) return;
+            selectedPrimitive.Apply(t);
             Redraw();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            TransformAll(AffineTransformations.Rotate(0.1f));
+            TransformAll(Transformation.Rotate(0.1f));
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TransformAll(AffineTransformations.Scale(1.1f, 1.1f));
+            TransformAll(Transformation.Scale(1.1f, 1.1f));
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            TransformAll(AffineTransformations.Translate(20.0f, 15.0f));
+            TransformAll(Transformation.Translate(20.0f, 15.0f));
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)

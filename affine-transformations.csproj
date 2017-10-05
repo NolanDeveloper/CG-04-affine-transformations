@@ -52,7 +52,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Primitives\AffineTransformations.cs" />
     <Compile Include="Primitives\Edge.cs" />
     <Compile Include="Primitives\Point2D.cs" />
     <Compile Include="Primitives\Polygon.cs" />
