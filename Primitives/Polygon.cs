@@ -17,16 +17,17 @@ namespace affine_transformations.Primitives
             this.points = points;
         }
 
-        public void Draw(Graphics g)
+        public void Draw(Graphics g, bool selected)
         {
             if (1 == Points.Count)
-                Points[0].Draw(g);
+                Points[0].Draw(g, selected);
             else
             {
+                Pen pen = new Pen(selected ? Color.Red : Color.Black);
+                pen.Width = 2;
                 for (int i = 0; i < Points.Count - 1; ++i)
-                    g.DrawLine(Pens.Black, Points[i].X, Points[i].Y, Points[i + 1].X, Points[i + 1].Y);
-                g.DrawLine(Pens.Black, Points[0].X, Points[0].Y, 
-                    Points[Points.Count - 1].X, Points[Points.Count - 1].Y);
+                    g.DrawLine(pen, Points[i].X, Points[i].Y, Points[i + 1].X, Points[i + 1].Y);
+                g.DrawLine(pen, Points[0].X, Points[0].Y, Points[Points.Count - 1].X, Points[Points.Count - 1].Y);
             }
         }
 

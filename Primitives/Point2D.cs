@@ -5,7 +5,7 @@ namespace affine_transformations.Primitives
 {
     class Point2D : Primitive
     {
-        private static float POINT_SIZE = 4;
+        private static float POINT_SIZE = 6;
 
         private float[] coords = new float[]{ 0, 0, 1 };
 
@@ -25,9 +25,10 @@ namespace affine_transformations.Primitives
             return new Point2D(point.X, point.Y);
         }
 
-        public void Draw(Graphics g)
+        public void Draw(Graphics g, bool selected)
         {
-            g.FillRectangle(Brushes.Black, X - POINT_SIZE / 2, Y - POINT_SIZE / 2, POINT_SIZE, POINT_SIZE);
+            var brush = selected ? Brushes.Red : Brushes.Black;
+            g.FillRectangle(brush, X - POINT_SIZE / 2, Y - POINT_SIZE / 2, POINT_SIZE, POINT_SIZE);
         }
 
         public void Apply(Transformation t)

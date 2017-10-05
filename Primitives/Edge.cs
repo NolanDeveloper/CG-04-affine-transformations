@@ -17,9 +17,11 @@ namespace affine_transformations.Primitives
             this.b = b;
         }
 
-        public void Draw(Graphics g)
+        public void Draw(Graphics g, bool selected)
         {
-            g.DrawLine(Pens.Black, A.X, A.Y, B.X, B.Y);
+            Pen pen = new Pen(selected ? Color.Red : Color.Black);
+            pen.Width = 2;
+            g.DrawLine(pen, A.X, A.Y, B.X, B.Y);
         }
 
         public void Apply(Transformation t)

@@ -18,6 +18,8 @@ namespace affine_transformations
         private bool shouldStartNewEdge = true;
         private Point2D edgeFirstPoint;
 
+        private Primitive selectedPrimitive;
+
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +33,11 @@ namespace affine_transformations
             MouseEventArgs args = (MouseEventArgs)e;
             Point2D p = Point2D.FromPoint(args.Location);
             if (rbPoint.Checked)
+            {
+                TreeNode node = treeView1.Nodes.Add("Точка");
+                node.Tag = p;
                 points.Add(p);
+            }
             else if (rbEdge.Checked)
             {
                 if (shouldStartNewEdge)
@@ -41,7 +47,10 @@ namespace affine_transformations
                 }
                 else
                 {
-                    edges.Add(new Edge(edgeFirstPoint, p));
+                    Edge edge = new Edge(edgeFirstPoint, p);
+                    TreeNode node = treeView1.Nodes.Add("Отрезок");
+                    node.Tag = edge;
+                    edges.Add(edge);
                     shouldStartNewEdge = true;
                 }
             }
@@ -49,7 +58,10 @@ namespace affine_transformations
             {
                 if (shouldStartNewPolygon)
                 {
-                    polygons.Add(new Polygon());
+                    Polygon polygon = new Polygon();
+                    TreeNode node = treeView1.Nodes.Add("Многоугольник");
+                    node.Tag = polygon;
+                    polygons.Add(polygon);
                     shouldStartNewPolygon = false;
                 }
                 polygons[polygons.Count - 1].Points.Add(p);
@@ -60,10 +72,10 @@ namespace affine_transformations
         private void Redraw()
         {
             graphics.Clear(Color.White);
-            if (!shouldStartNewEdge) edgeFirstPoint.Draw(graphics);
-            points.ForEach((p) => p.Draw(graphics));
-            edges.ForEach((e) => e.Draw(graphics));
-            polygons.ForEach((p) => p.Draw(graphics));
+            if (!shouldStartNewEdge) edgeFirstPoint.Draw(graphics, false);
+            points.ForEach((p) => p.Draw(graphics, p == selectedPrimitive));
+            edges.ForEach((e) => e.Draw(graphics, e == selectedPrimitive));
+            polygons.ForEach((p) => p.Draw(graphics, p == selectedPrimitive));
             pictureBox1.Invalidate();
         }
 
@@ -98,6 +110,12 @@ namespace affine_transformations
         private void button4_Click(object sender, EventArgs e)
         {
             TransformAll(AffineTransformations.Translate(20.0f, 15.0f));
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            selectedPrimitive = (Primitive)e.Node.Tag;
+            Redraw();
         }
     }
 }
