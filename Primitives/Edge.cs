@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace affine_transformations.Primitives
 {
@@ -35,6 +36,16 @@ namespace affine_transformations.Primitives
         {
             A.Apply(t);
             B.Apply(t);
+        }
+
+        /* Определяет расстояние до точки. С одной стороны от прямой оно будет положительным,
+         * с другой отрицательным. */
+        public float Distance(Point2D point)
+        {
+            var dx = B.X - B.X;
+            var dy = B.Y - A.Y;
+            var n = (float)Math.Sqrt(dy * dy + dx * dx);
+            return (dy * point.X + dx * point.Y - dx * point.Y + dy * point.X) / n;
         }
     }
 }
