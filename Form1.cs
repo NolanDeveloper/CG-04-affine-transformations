@@ -155,5 +155,61 @@ namespace affine_transformations
             if (!shouldShowDistance) return;
             label1.Text = "" + previouslySelectedEdge.Distance(new Point2D(e.X, e.Y));
         }
+
+
+
+        // ---------- блок Ани
+
+        // Уравнение прямой, проходящей через две заданные точки (x1,y1) и (x2,y2):
+        // (y1 - y2)x + (x2 - x1)y + (x1y2 - x2y1) = 0
+        private void lineEquation(Edge e, out float A, out float B, out float C)
+        {
+            A = e.A.Y - e.B.Y;
+            B = e.B.X - e.A.X;
+            C = e.A.X * e.B.Y - e.B.X * e.A.Y;
+        }
+
+        // Зная уравнения прямых : A1x + B1y + C1 = 0 и A2x + B2y + C2 = 0, 
+        // получим точку пересечения по формуле Крамера:
+        // x = - (C1B2 - C2B1)/(A1B2 - A2B1)
+        // y = - (A1C2 - A2C1)/(A1B2 - A2B1)
+        private Point2D findPoint(float A1, float A2, float B1, float B2, float C1, float C2, out float x, out float y)
+        {
+            var denom = A1 * B2 - A2 * B1;
+            x = -1 * (C1 * B2 - C2 * B1) / denom;
+            y = -1 * (A1 * C2 - A2 * C1) / denom;
+            return (new Point2D(x, y));
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (edges.Count < 2)
+                MessageBox.Show("Выберите два ребра");
+            else
+            {
+                var e1 = edges[edges.Count - 1];
+                var e2 = edges[edges.Count - 2];
+
+                float A1, B1, C1, A2, B2, C2, xRes, yRes;
+                lineEquation((Edge)e1, out A1, out B1, out C1);
+                lineEquation(e2, out A2, out B2, out C2);
+                var p = findPoint(A1, A2, B1, B2, C1, C2, out xRes, out yRes);
+
+                if ((p.X >= Math.Min(e1.A.X, e1.B.X)) && (p.X <= Math.Max(e1.A.X, e1.B.X)) &&
+                    (p.X >= Math.Min(e2.A.X, e2.B.X)) && (p.X <= Math.Max(e2.A.X, e2.B.X)) &&
+                    (p.Y >= Math.Min(e1.A.Y, e1.B.Y)) && (p.Y <= Math.Max(e1.A.Y, e1.B.Y)) &&
+                    (p.Y >= Math.Min(e2.A.Y, e2.B.Y)) && (p.Y <= Math.Max(e2.A.Y, e2.B.Y)))
+                {
+                    graphics.FillEllipse(new SolidBrush(Color.Yellow), p.X - 3, p.Y - 3, 6, 6);
+                    pictureBox1.Refresh();
+                }
+                else
+                    MessageBox.Show("Ребра не имеют общей точки");
+            }
+
+        }
+
+        // ---------- конец блока
+
     }
 }
