@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace affine_transformations.Primitives
 {
@@ -10,6 +9,14 @@ namespace affine_transformations.Primitives
 
         public Point2D A { get { return a; } set { a = value; } }
         public Point2D B { get { return b; } set { b = value; } }
+
+        public Point2D Center
+        {
+            get
+            {
+                return new Point2D((A.X + B.X) / 2, (A.Y + B.Y) / 2);
+            }
+        }
 
         public Edge(Point2D a, Point2D b)
         {

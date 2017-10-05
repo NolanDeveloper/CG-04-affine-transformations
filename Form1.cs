@@ -18,7 +18,20 @@ namespace affine_transformations
         private bool shouldStartNewEdge = true;
         private Point2D edgeFirstPoint;
 
-        private Primitive selectedPrimitive;
+        private Primitive SelectedPrimitive
+        {
+            get
+            {
+                if (null == treeView1.SelectedNode) return null;
+                var p = (Primitive)treeView1.SelectedNode.Tag;
+                buttonRotate.Enabled = p is Edge;
+                return p;
+            }
+            set
+            {
+                Redraw();
+            }
+        }
 
         public Form1()
         {
@@ -73,9 +86,9 @@ namespace affine_transformations
         {
             graphics.Clear(Color.White);
             if (!shouldStartNewEdge) edgeFirstPoint.Draw(graphics, false);
-            points.ForEach((p) => p.Draw(graphics, p == selectedPrimitive));
-            edges.ForEach((e) => e.Draw(graphics, e == selectedPrimitive));
-            polygons.ForEach((p) => p.Draw(graphics, p == selectedPrimitive));
+            points.ForEach((p) => p.Draw(graphics, p == SelectedPrimitive));
+            edges.ForEach((e) => e.Draw(graphics, e == SelectedPrimitive));
+            polygons.ForEach((p) => p.Draw(graphics, p == SelectedPrimitive));
             pictureBox1.Invalidate();
         }
 
@@ -89,46 +102,36 @@ namespace affine_transformations
             shouldStartNewPolygon = true;
         }
 
-        private void TransformAll(Transformation t)
-        {
-            if (null == selectedPrimitive) return;
-            selectedPrimitive.Apply(t);
-            Redraw();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            TransformAll(Transformation.Rotate(0.1f));
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            TransformAll(Transformation.Scale(1.1f, 1.1f));
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            TransformAll(Transformation.Translate(20.0f, 15.0f));
-        }
-
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            selectedPrimitive = (Primitive)e.Node.Tag;
+            SelectedPrimitive = (Primitive)e.Node.Tag;
             Redraw();
         }
 
         private void treeView1_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keys.Delete != e.KeyCode) return;
-            if (null == selectedPrimitive) return;
-            if (selectedPrimitive is Point2D) points.Remove((Point2D)selectedPrimitive);
-            if (selectedPrimitive is Edge) edges.Remove((Edge)selectedPrimitive);
-            if (selectedPrimitive is Polygon) polygons.Remove((Polygon)selectedPrimitive);
+            if (null == SelectedPrimitive) return;
+            if (SelectedPrimitive is Point2D) points.Remove((Point2D)SelectedPrimitive);
+            if (SelectedPrimitive is Edge) edges.Remove((Edge)SelectedPrimitive);
+            if (SelectedPrimitive is Polygon) polygons.Remove((Polygon)SelectedPrimitive);
             treeView1.SelectedNode.Remove();
             if (null != treeView1.SelectedNode)
-                selectedPrimitive = (Primitive)treeView1.SelectedNode.Tag;
+                SelectedPrimitive = (Primitive)treeView1.SelectedNode.Tag;
             else
-                selectedPrimitive = null;
+                SelectedPrimitive = null;
+            Redraw();
+        }
+
+        private void buttonRotate_Click(object sender, EventArgs e)
+        {
+            var edge = (Edge)SelectedPrimitive;
+            var center = edge.Center;
+            var moveToCenter = Transformation.Translate(-center.X, -center.Y);
+            var rotate = Transformation.Rotate((float) Math.PI / 2);
+            var moveBack = Transformation.Translate(center.X, center.Y);
+            var t = Transformation.Compose(Transformation.Compose(moveToCenter, rotate), moveBack);
+            edge.Apply(t);
             Redraw();
         }
     }
