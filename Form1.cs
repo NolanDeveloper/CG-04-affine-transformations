@@ -18,6 +18,9 @@ namespace affine_transformations
         private bool shouldStartNewEdge = true;
         private Point2D edgeFirstPoint;
 
+        private bool shouldShowDistance = false;
+        private Edge previouslySelectedEdge;
+
         private Primitive SelectedPrimitive
         {
             get
@@ -25,6 +28,14 @@ namespace affine_transformations
                 if (null == treeView1.SelectedNode) return null;
                 var p = (Primitive)treeView1.SelectedNode.Tag;
                 buttonRotate.Enabled = p is Edge;
+                buttonDistance.Enabled = p is Edge;
+                if (p is Edge) previouslySelectedEdge = (Edge)p;
+                if (p is Point2D && shouldShowDistance)
+                {
+                    MessageBox.Show("Расстояние от отрезка до точки: " + 
+                        previouslySelectedEdge.Distance((Point2D)p));
+                }
+                if (!(p is Edge)) shouldShowDistance = false;
                 return p;
             }
             set
@@ -132,6 +143,17 @@ namespace affine_transformations
             var moveBack = Transformation.Translate(center.X, center.Y);
             edge.Apply(moveToCenter * rotate * moveBack);
             Redraw();
+        }
+
+        private void buttonDistance_Click(object sender, EventArgs e)
+        {
+            shouldShowDistance = true;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!shouldShowDistance) return;
+            label1.Text = "" + previouslySelectedEdge.Distance(new Point2D(e.X, e.Y));
         }
     }
 }

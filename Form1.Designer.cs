@@ -40,6 +40,8 @@ namespace affine_transformations
             this.rbPolygon = new System.Windows.Forms.RadioButton();
             this.rbEdge = new System.Windows.Forms.RadioButton();
             this.rbPoint = new System.Windows.Forms.RadioButton();
+            this.buttonDistance = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,6 +68,8 @@ namespace affine_transformations
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.buttonDistance);
             this.splitContainer1.Panel2.Controls.Add(this.buttonRotate);
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
@@ -111,9 +115,11 @@ namespace affine_transformations
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
             // buttonRotate
             // 
+            this.buttonRotate.Enabled = false;
             this.buttonRotate.Location = new System.Drawing.Point(10, 149);
             this.buttonRotate.Name = "buttonRotate";
             this.buttonRotate.Size = new System.Drawing.Size(75, 23);
@@ -178,6 +184,26 @@ namespace affine_transformations
             this.rbPoint.Text = "Точка";
             this.rbPoint.UseVisualStyleBackColor = true;
             // 
+            // buttonDistance
+            // 
+            this.buttonDistance.Enabled = false;
+            this.buttonDistance.Location = new System.Drawing.Point(10, 179);
+            this.buttonDistance.Name = "buttonDistance";
+            this.buttonDistance.Size = new System.Drawing.Size(103, 23);
+            this.buttonDistance.TabIndex = 4;
+            this.buttonDistance.Text = "Расстояние до";
+            this.buttonDistance.UseVisualStyleBackColor = true;
+            this.buttonDistance.Click += new System.EventHandler(this.buttonDistance_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 209);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -188,6 +214,7 @@ namespace affine_transformations
             this.Text = "Form1";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -213,6 +240,8 @@ namespace affine_transformations
         private TreeView treeView1;
         private PictureBox pictureBox1;
         private Button buttonRotate;
+        private Button buttonDistance;
+        private Label label1;
     }
 }
 

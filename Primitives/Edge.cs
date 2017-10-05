@@ -42,10 +42,12 @@ namespace affine_transformations.Primitives
          * с другой отрицательным. */
         public float Distance(Point2D point)
         {
-            var dx = B.X - B.X;
+            var dx = B.X - A.X;
             var dy = B.Y - A.Y;
             var n = (float)Math.Sqrt(dy * dy + dx * dx);
-            return (dy * point.X + dx * point.Y - dx * point.Y + dy * point.X) / n;
+            dx /= n;
+            dy /= n;
+            return dx * point.Y - dy * point.X - dx * A.Y + dy * A.X;
         }
     }
 }
