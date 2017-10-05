@@ -44,6 +44,8 @@ namespace affine_transformations
             this.rbPoint = new System.Windows.Forms.RadioButton();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,6 +72,8 @@ namespace affine_transformations
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button3);
+            this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.button2);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
@@ -227,6 +231,25 @@ namespace affine_transformations
             this.label2.TabIndex = 7;
             this.label2.Text = "Точка пересечения двух ребер:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 314);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(177, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Принадлежность точки полигону:";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(13, 330);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(138, 23);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Метод углов";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,6 +290,8 @@ namespace affine_transformations
         private Label label1;
         private Button button2;
         private Label label2;
+        private Button button3;
+        private Label label3;
     }
 }
 

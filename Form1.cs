@@ -209,6 +209,61 @@ namespace affine_transformations
 
         }
 
+
+        // arccos( ( PVi-1 * PVi ) / |PVi-1| * |PVi| )
+        private double degreeBetweenEdges(Edge e1, Edge e2)
+        {
+            // находим координаты векторов по начальной и конечной точке
+            var xE1 = e1.B.X - e1.A.X;
+            var yE1 = e1.B.Y - e1.A.Y;
+
+            var xE2 = e2.B.X - e2.A.X;
+            var yE2 = e2.B.Y - e2.A.Y;
+
+            // находим длины векторов 
+            var lenE1 = Math.Sqrt(xE1 * xE1 + yE1 * yE1);
+            var lenE2 = Math.Sqrt(xE2 * xE2 + yE2 * yE2);
+
+            // Находим скалярное произведение PVi-1 * PVi
+            var scalarProd = xE1 * xE2 + yE1 * yE2;
+
+            return Math.Acos(scalarProd / (lenE1 * lenE2)); //* Math.Sign(xE1 * yE2 - yE1 * xE2);
+        }
+
+        // определить принадлежность точки полигону методом углов
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (polygons.Count == 0)
+                MessageBox.Show("Нарисуйте хотя бы один многоугольник");
+            else if (points.Count == 0)
+                MessageBox.Show("Нарисуйте хотя бы одну точку");
+            else 
+            {
+                var p = points[points.Count - 1];
+                var poly = polygons[polygons.Count - 1];
+
+                if (poly.Points.Count < 3)
+                    MessageBox.Show("Составьте полигон верно");
+                else
+                {
+                    double sumDegree = 0;
+
+                    for (int i = 0; i < poly.Points.Count - 1; ++i)
+                        sumDegree += degreeBetweenEdges(new Edge(p, poly.Points[i]), new Edge(p, poly.Points[i+1]));
+                    
+                    // ИСПРАВИТЬ 
+
+                    if (sumDegree < 1)
+                        MessageBox.Show("Точка лежит снаружи многоугольника");
+                    else
+                        MessageBox.Show("Точка лежит внутри многоугольника");
+                }
+
+            }
+        }
+
+
+
         // ---------- конец блока
 
     }
