@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace affine_transformations.Primitives
 {
@@ -41,6 +40,11 @@ namespace affine_transformations.Primitives
                     newCoords[i] += coords[j] * t.Get(j, i);
             }
             coords = newCoords;
+        }
+
+        public int Classify(Edge edge)
+        {
+
         }
     }
 }

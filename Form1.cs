@@ -130,8 +130,7 @@ namespace affine_transformations
             var moveToCenter = Transformation.Translate(-center.X, -center.Y);
             var rotate = Transformation.Rotate((float) Math.PI / 2);
             var moveBack = Transformation.Translate(center.X, center.Y);
-            var t = Transformation.Compose(Transformation.Compose(moveToCenter, rotate), moveBack);
-            edge.Apply(t);
+            edge.Apply(moveToCenter * rotate * moveBack);
             Redraw();
         }
     }
