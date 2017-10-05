@@ -41,10 +41,5 @@ namespace affine_transformations.Primitives
             }
             coords = newCoords;
         }
-
-        public int Classify(Edge edge)
-        {
-
-        }
     }
 }
