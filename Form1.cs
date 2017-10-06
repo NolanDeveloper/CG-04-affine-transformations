@@ -21,6 +21,12 @@ namespace affine_transformations
         private bool shouldShowDistance = false;
         private Edge previouslySelectedEdge;
 
+		private Edge lastEdge;
+		private Edge previousEdge;
+		private Polygon lastPolygon;
+		private Point2D lastPoint;
+
+
         private Primitive SelectedPrimitive
         {
             get
@@ -61,7 +67,7 @@ namespace affine_transformations
                 TreeNode node = treeView1.Nodes.Add("Точка");
                 node.Tag = p;
                 points.Add(p);
-            }
+			}
             else if (rbEdge.Checked)
             {
                 if (shouldStartNewEdge)
@@ -116,7 +122,17 @@ namespace affine_transformations
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             SelectedPrimitive = (Primitive)e.Node.Tag;
-            Redraw();
+			if (SelectedPrimitive is Point2D)
+				lastPoint = (Point2D)SelectedPrimitive;
+			else if (SelectedPrimitive is Polygon)
+				lastPolygon = (Polygon)SelectedPrimitive;
+			else if (SelectedPrimitive is Edge)
+			{
+				previousEdge = lastEdge;
+				lastEdge = (Edge)SelectedPrimitive;
+			}
+			
+			Redraw();
         }
 
         private void treeView1_KeyDown(object sender, KeyEventArgs e)
@@ -181,38 +197,46 @@ namespace affine_transformations
             return (new Point2D(x, y));
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (edges.Count < 2)
-                MessageBox.Show("Выберите два ребра");
-            else
-            {
-                var e1 = edges[edges.Count - 1];
-                var e2 = edges[edges.Count - 2];
+		private void button2_Click(object sender, EventArgs e)
+		{
+			if (edges.Count < 2)
+				MessageBox.Show("Нарисуйте хотя бы два ребра");
+			else
+			{
+				// var e1 = edges[edges.Count - 1];
+				// var e2 = edges[edges.Count - 2];
 
-                float A1, B1, C1, A2, B2, C2, xRes, yRes;
-                lineEquation((Edge)e1, out A1, out B1, out C1);
-                lineEquation(e2, out A2, out B2, out C2);
-                var p = findPoint(A1, A2, B1, B2, C1, C2, out xRes, out yRes);
+				var e1 = previousEdge;
+				var e2 = lastEdge;
 
-                if ((p.X >= Math.Min(e1.A.X, e1.B.X)) && (p.X <= Math.Max(e1.A.X, e1.B.X)) &&
-                    (p.X >= Math.Min(e2.A.X, e2.B.X)) && (p.X <= Math.Max(e2.A.X, e2.B.X)) &&
-                    (p.Y >= Math.Min(e1.A.Y, e1.B.Y)) && (p.Y <= Math.Max(e1.A.Y, e1.B.Y)) &&
-                    (p.Y >= Math.Min(e2.A.Y, e2.B.Y)) && (p.Y <= Math.Max(e2.A.Y, e2.B.Y)))
-                {
-                    graphics.FillEllipse(new SolidBrush(Color.Yellow), p.X - 3, p.Y - 3, 6, 6);
-                    pictureBox1.Refresh();
-                }
-                else
-                    MessageBox.Show("Ребра не имеют общей точки");
+				if (e1 == null || e2 == null)
+					MessageBox.Show("Выберите два ребра");
+				else
+				{
+					float A1, B1, C1, A2, B2, C2, xRes, yRes;
+					lineEquation((Edge)e1, out A1, out B1, out C1);
+					lineEquation(e2, out A2, out B2, out C2);
+					var p = findPoint(A1, A2, B1, B2, C1, C2, out xRes, out yRes);
+
+					if ((p.X >= Math.Min(e1.A.X, e1.B.X)) && (p.X <= Math.Max(e1.A.X, e1.B.X)) &&
+						(p.X >= Math.Min(e2.A.X, e2.B.X)) && (p.X <= Math.Max(e2.A.X, e2.B.X)) &&
+						(p.Y >= Math.Min(e1.A.Y, e1.B.Y)) && (p.Y <= Math.Max(e1.A.Y, e1.B.Y)) &&
+						(p.Y >= Math.Min(e2.A.Y, e2.B.Y)) && (p.Y <= Math.Max(e2.A.Y, e2.B.Y)))
+					{
+						graphics.FillEllipse(new SolidBrush(Color.Yellow), p.X - 3, p.Y - 3, 6, 6);
+						pictureBox1.Refresh();
+					}
+					else
+						MessageBox.Show("Ребра не имеют общей точки");
+				}
             }
 
         }
 
 
 
-        // arccos( ( PVi-1 * PVi ) / |PVi-1| * |PVi| )
-        private double degreeBetweenEdges(Edge e1, Edge e2)
+		// arccos( ( PVi-1 * PVi ) / |PVi-1| * |PVi| ) * sign ( det (PVi-1 PVi) )
+		private double degreeBetweenEdges(Edge e1, Edge e2)
         {
             // находим координаты векторов по начальной и конечной точке
             var xE1 = e1.B.X - e1.A.X;
@@ -240,26 +264,31 @@ namespace affine_transformations
                 MessageBox.Show("Нарисуйте хотя бы одну точку");
             else 
             {
-                var p = points[points.Count - 1];
-                var poly = polygons[polygons.Count - 1];
+				var p = lastPoint;
+				var poly = lastPolygon;
 
-                if (poly.Points.Count < 3)
-                    MessageBox.Show("Составьте полигон верно");
-                else
-                {
-                    double sumDegree = 0;
+				if (p == null || poly == null)
+					MessageBox.Show("Выберите точку и многоугольник");
+				else
+				{
+					if (poly.Points.Count < 3)
+						MessageBox.Show("Составьте полигон верно");
+					else
+					{
+						double sumDegree = 0;
 
-                    for (int i = 0; i < poly.Points.Count - 1; ++i)
-                        sumDegree += degreeBetweenEdges(new Edge(p, poly.Points[i]), new Edge(p, poly.Points[i+1]));
+						for (int i = 0; i < poly.Points.Count - 1; ++i)
+							sumDegree += degreeBetweenEdges(new Edge(p, poly.Points[i]), new Edge(p, poly.Points[i + 1]));
 
-					sumDegree += degreeBetweenEdges(new Edge(p, poly.Points[poly.Points.Count - 1]), new Edge(p, poly.Points[0]));
-					
-					var eps = 0.0001;
-                    if (Math.Abs( sumDegree - 0) < eps)
-                        MessageBox.Show("Точка лежит снаружи многоугольника");
-                    else
-                        MessageBox.Show("Точка лежит внутри многоугольника");
-                }
+						sumDegree += degreeBetweenEdges(new Edge(p, poly.Points[poly.Points.Count - 1]), new Edge(p, poly.Points[0]));
+
+						var eps = 0.0001;
+						if (Math.Abs(sumDegree - 0) < eps)
+							MessageBox.Show("Точка лежит снаружи многоугольника");
+						else
+							MessageBox.Show("Точка лежит внутри многоугольника");
+					}
+				}
 
             }
         }
