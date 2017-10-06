@@ -294,8 +294,92 @@ namespace affine_transformations
         }
 
 
+		// ---------- конец блока
 
-        // ---------- конец блока
+		private bool even_od_rule(Polygon pol, Point2D p2D)
+		{
+			graphics.FillEllipse(new SolidBrush(Color.Red), p2D.X - 3, p2D.Y - 3, 8, 8);
 
-    }
+			for (int i = 0; i < pol.Points.Count - 1; i++)
+				graphics.DrawLine(new Pen(Color.Red, 3), pol.Points[i].X, pol.Points[i].Y, pol.Points[i + 1].X, pol.Points[i + 1].Y);
+
+			graphics.DrawLine(new Pen(Color.Red, 3), pol.Points[0].X, pol.Points[0].Y, pol.Points[pol.Points.Count - 1].X, pol.Points[pol.Points.Count - 1].Y);
+
+			int avg_x = (int)(pol.Points[1].X + pol.Points[0].X) / 2;
+			int avg_y = (int)(pol.Points[1].Y + pol.Points[0].Y) / 2;
+
+			Point2D p_avg = Point2D.FromPoint(new Point(avg_x, avg_y));
+
+			float rX = p2D.X - p_avg.X;
+			float rY = p2D.Y - p_avg.Y;
+
+			graphics.DrawLine(new Pen(Color.DeepPink, 1), new Point((int)p2D.X, (int)p2D.Y), new Point((int)p_avg.X, (int)p_avg.Y));
+			pictureBox1.Refresh();
+
+			var e = new Edge(p2D, p_avg);
+			float A, B, C;
+			lineEquation(e, out A, out B, out C); //Прямая, проходящая через заданую точку и середину первого ребра
+
+			int count_point = 1;
+
+			for (int i = 1; i < pol.Points.Count; ++i)
+			{
+
+				var e1 = new Edge(pol.Points[i], pol.Points[(i + 1) % pol.Points.Count]);
+
+
+				float A1, B1, C1, xRes, yRes;
+				lineEquation((Edge)e1, out A1, out B1, out C1);
+				Point2D pr = findPoint(A1, A, B1, B, C1, C, out xRes, out yRes);
+
+				if ((pr.X >= Math.Min(e1.A.X, e1.B.X)) && (pr.X <= Math.Max(e1.A.X, e1.B.X)) &&
+					(pr.Y >= Math.Min(e1.A.Y, e1.B.Y)) && (pr.Y <= Math.Max(e1.A.Y, e1.B.Y)) &&
+					(p2D.X - pr.X) * rX > 0 && (p2D.Y - pr.Y) * rY > 0)
+				{
+					graphics.DrawLine(new Pen(Color.Red, 1), new Point((int)p2D.X, (int)p2D.Y), new Point((int)pr.X, (int)pr.Y));
+					pictureBox1.Refresh();
+					++count_point;
+				}
+			}
+
+			return count_point % 2 == 1;
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			if (points.Count < 1 | polygons.Count < 1)
+				MessageBox.Show("Не хватает точек или полигонов");
+			else
+			{
+				if (even_od_rule(polygons[polygons.Count - 1], points[points.Count - 1]))
+					MessageBox.Show("Да");
+				else
+					MessageBox.Show("Нет");
+			}
+		}
+
+		private void button5_Click(object sender, EventArgs e)
+		{
+
+			var edge = (Primitive)SelectedPrimitive;
+			/* if (edge == null)
+				 edge = points[points.Count - 1];*/
+
+			var center = points[points.Count - 1];
+			var moveToCenter = Transformation.Translate(-center.X, -center.Y);
+
+			pictureBox1.Refresh();
+
+			if (int.Parse(textBox1.Text) > 0)
+			{
+
+				Transformation rotate = Transformation.Rotate((float)(Math.PI / 180 * int.Parse(textBox1.Text)));
+				var moveBack = Transformation.Translate(center.X, center.Y);
+				edge.Apply(moveToCenter * rotate * moveBack);
+				Redraw();
+
+				graphics.FillEllipse(new SolidBrush(Color.Red), center.X - 3, center.Y - 3, 8, 8);
+			}
+		}
+	}
 }
