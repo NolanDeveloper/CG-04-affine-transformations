@@ -210,6 +210,7 @@ namespace affine_transformations
         }
 
 
+
         // arccos( ( PVi-1 * PVi ) / |PVi-1| * |PVi| )
         private double degreeBetweenEdges(Edge e1, Edge e2)
         {
@@ -226,8 +227,8 @@ namespace affine_transformations
 
             // Находим скалярное произведение PVi-1 * PVi
             var scalarProd = xE1 * xE2 + yE1 * yE2;
-
-            return Math.Acos(scalarProd / (lenE1 * lenE2)); //* Math.Sign(xE1 * yE2 - yE1 * xE2);
+			
+			return Math.Acos(scalarProd / (lenE1 * lenE2)) * Math.Sign(xE1 * yE2 - yE1 * xE2);
         }
 
         // определить принадлежность точки полигону методом углов
@@ -250,10 +251,11 @@ namespace affine_transformations
 
                     for (int i = 0; i < poly.Points.Count - 1; ++i)
                         sumDegree += degreeBetweenEdges(new Edge(p, poly.Points[i]), new Edge(p, poly.Points[i+1]));
-                    
-                    // ИСПРАВИТЬ 
 
-                    if (sumDegree < 1)
+					sumDegree += degreeBetweenEdges(new Edge(p, poly.Points[poly.Points.Count - 1]), new Edge(p, poly.Points[0]));
+					
+					var eps = 0.0001;
+                    if (Math.Abs( sumDegree - 0) < eps)
                         MessageBox.Show("Точка лежит снаружи многоугольника");
                     else
                         MessageBox.Show("Точка лежит внутри многоугольника");
