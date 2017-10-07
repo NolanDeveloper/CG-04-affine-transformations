@@ -46,6 +46,9 @@ namespace affine_transformations
             }
             set
             {
+                button5.Enabled = button6.Enabled = button7.Enabled =
+                    textBox1.Enabled = textBoxDx.Enabled = textBoxDy.Enabled =
+                    textBoxSx.Enabled = textBoxSy.Enabled = null != treeView1.SelectedNode;
                 Redraw();
             }
         }
@@ -381,5 +384,35 @@ namespace affine_transformations
 				graphics.FillEllipse(new SolidBrush(Color.Red), center.X - 3, center.Y - 3, 8, 8);
 			}
 		}
-	}
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            float dx, dy;
+            if (!float.TryParse(textBoxDx.Text, out dx) || !float.TryParse(textBoxDy.Text, out dy))
+            {
+                MessageBox.Show("Указаны невалидные значения.");
+                return;
+            }
+            SelectedPrimitive.Apply(Transformation.Translate(dx, dy));
+            Redraw();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            float sx, sy;
+            if (!float.TryParse(textBoxSx.Text, out sx) || !float.TryParse(textBoxSy.Text, out sy))
+            {
+                MessageBox.Show("Указаны невалидные значения.");
+                return;
+            }
+            SelectedPrimitive.Apply(Transformation.Scale(sx, sy));
+            Redraw();
+        }
+
+        private void SelectAll(object sender, EventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            textBox.SelectAll();
+        }
+    }
 }

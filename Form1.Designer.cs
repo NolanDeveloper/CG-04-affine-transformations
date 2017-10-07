@@ -30,281 +30,358 @@ namespace affine_transformations
         /// </summary>
         private void InitializeComponent()
         {
-			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.treeView1 = new System.Windows.Forms.TreeView();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.button3 = new System.Windows.Forms.Button();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.button2 = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
-			this.buttonDistance = new System.Windows.Forms.Button();
-			this.buttonRotate = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.rbPolygon = new System.Windows.Forms.RadioButton();
-			this.rbEdge = new System.Windows.Forms.RadioButton();
-			this.rbPoint = new System.Windows.Forms.RadioButton();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button5 = new System.Windows.Forms.Button();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-			this.splitContainer1.Panel1.SuspendLayout();
-			this.splitContainer1.Panel2.SuspendLayout();
-			this.splitContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-			this.splitContainer2.Panel1.SuspendLayout();
-			this.splitContainer2.Panel2.SuspendLayout();
-			this.splitContainer2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-			this.groupBox1.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// splitContainer1
-			// 
-			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-			this.splitContainer1.IsSplitterFixed = true;
-			this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer1.Name = "splitContainer1";
-			// 
-			// splitContainer1.Panel1
-			// 
-			this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
-			// 
-			// splitContainer1.Panel2
-			// 
-			this.splitContainer1.Panel2.Controls.Add(this.textBox1);
-			this.splitContainer1.Panel2.Controls.Add(this.button5);
-			this.splitContainer1.Panel2.Controls.Add(this.button4);
-			this.splitContainer1.Panel2.Controls.Add(this.button3);
-			this.splitContainer1.Panel2.Controls.Add(this.label3);
-			this.splitContainer1.Panel2.Controls.Add(this.label2);
-			this.splitContainer1.Panel2.Controls.Add(this.button2);
-			this.splitContainer1.Panel2.Controls.Add(this.label1);
-			this.splitContainer1.Panel2.Controls.Add(this.buttonDistance);
-			this.splitContainer1.Panel2.Controls.Add(this.buttonRotate);
-			this.splitContainer1.Panel2.Controls.Add(this.button1);
-			this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-			this.splitContainer1.Size = new System.Drawing.Size(852, 561);
-			this.splitContainer1.SplitterDistance = 660;
-			this.splitContainer1.TabIndex = 1;
-			// 
-			// splitContainer2
-			// 
-			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-			this.splitContainer2.IsSplitterFixed = true;
-			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer2.Name = "splitContainer2";
-			// 
-			// splitContainer2.Panel1
-			// 
-			this.splitContainer2.Panel1.Controls.Add(this.treeView1);
-			// 
-			// splitContainer2.Panel2
-			// 
-			this.splitContainer2.Panel2.Controls.Add(this.pictureBox1);
-			this.splitContainer2.Size = new System.Drawing.Size(660, 561);
-			this.splitContainer2.SplitterDistance = 220;
-			this.splitContainer2.TabIndex = 0;
-			// 
-			// treeView1
-			// 
-			this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeView1.Location = new System.Drawing.Point(0, 0);
-			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(220, 561);
-			this.treeView1.TabIndex = 0;
-			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-			this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
-			// 
-			// pictureBox1
-			// 
-			this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(436, 561);
-			this.pictureBox1.TabIndex = 0;
-			this.pictureBox1.TabStop = false;
-			this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-			this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-			// 
-			// button3
-			// 
-			this.button3.Location = new System.Drawing.Point(13, 330);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(138, 23);
-			this.button3.TabIndex = 9;
-			this.button3.Text = "Метод углов";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(7, 314);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(177, 13);
-			this.label3.TabIndex = 8;
-			this.label3.Text = "Принадлежность точки полигону:";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(10, 248);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(166, 13);
-			this.label2.TabIndex = 7;
-			this.label2.Text = "Точка пересечения двух ребер:";
-			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(10, 264);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(138, 26);
-			this.button2.TabIndex = 6;
-			this.button2.Text = "Найти";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(10, 209);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(35, 13);
-			this.label1.TabIndex = 5;
-			this.label1.Text = "label1";
-			// 
-			// buttonDistance
-			// 
-			this.buttonDistance.Enabled = false;
-			this.buttonDistance.Location = new System.Drawing.Point(10, 179);
-			this.buttonDistance.Name = "buttonDistance";
-			this.buttonDistance.Size = new System.Drawing.Size(138, 23);
-			this.buttonDistance.TabIndex = 4;
-			this.buttonDistance.Text = "Расстояние до";
-			this.buttonDistance.UseVisualStyleBackColor = true;
-			this.buttonDistance.Click += new System.EventHandler(this.buttonDistance_Click);
-			// 
-			// buttonRotate
-			// 
-			this.buttonRotate.Enabled = false;
-			this.buttonRotate.Location = new System.Drawing.Point(10, 149);
-			this.buttonRotate.Name = "buttonRotate";
-			this.buttonRotate.Size = new System.Drawing.Size(138, 23);
-			this.buttonRotate.TabIndex = 3;
-			this.buttonRotate.Text = "Развернуть";
-			this.buttonRotate.UseVisualStyleBackColor = true;
-			this.buttonRotate.Click += new System.EventHandler(this.buttonRotate_Click);
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(10, 119);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(138, 23);
-			this.button1.TabIndex = 2;
-			this.button1.Text = "Новый многоугольник";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
-			// groupBox1
-			// 
-			this.groupBox1.Controls.Add(this.rbPolygon);
-			this.groupBox1.Controls.Add(this.rbEdge);
-			this.groupBox1.Controls.Add(this.rbPoint);
-			this.groupBox1.Location = new System.Drawing.Point(4, 12);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(172, 100);
-			this.groupBox1.TabIndex = 1;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Примитив";
-			// 
-			// rbPolygon
-			// 
-			this.rbPolygon.AutoSize = true;
-			this.rbPolygon.Location = new System.Drawing.Point(6, 67);
-			this.rbPolygon.Name = "rbPolygon";
-			this.rbPolygon.Size = new System.Drawing.Size(103, 17);
-			this.rbPolygon.TabIndex = 3;
-			this.rbPolygon.Text = "Многоугольник";
-			this.rbPolygon.UseVisualStyleBackColor = true;
-			this.rbPolygon.CheckedChanged += new System.EventHandler(this.rbPolygon_CheckedChanged);
-			// 
-			// rbEdge
-			// 
-			this.rbEdge.AutoSize = true;
-			this.rbEdge.Location = new System.Drawing.Point(6, 43);
-			this.rbEdge.Name = "rbEdge";
-			this.rbEdge.Size = new System.Drawing.Size(68, 17);
-			this.rbEdge.TabIndex = 2;
-			this.rbEdge.TabStop = true;
-			this.rbEdge.Text = "Отрезок";
-			this.rbEdge.UseVisualStyleBackColor = true;
-			// 
-			// rbPoint
-			// 
-			this.rbPoint.AutoSize = true;
-			this.rbPoint.Checked = true;
-			this.rbPoint.Location = new System.Drawing.Point(6, 19);
-			this.rbPoint.Name = "rbPoint";
-			this.rbPoint.Size = new System.Drawing.Size(55, 17);
-			this.rbPoint.TabIndex = 1;
-			this.rbPoint.TabStop = true;
-			this.rbPoint.Text = "Точка";
-			this.rbPoint.UseVisualStyleBackColor = true;
-			// 
-			// button4
-			// 
-			this.button4.Location = new System.Drawing.Point(13, 359);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(138, 23);
-			this.button4.TabIndex = 10;
-			this.button4.Text = "Метод лучей";
-			this.button4.UseVisualStyleBackColor = true;
-			this.button4.Click += new System.EventHandler(this.button4_Click);
-			// 
-			// button5
-			// 
-			this.button5.Location = new System.Drawing.Point(13, 430);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(85, 23);
-			this.button5.TabIndex = 11;
-			this.button5.Text = "Повернуть на";
-			this.button5.UseVisualStyleBackColor = true;
-			this.button5.Click += new System.EventHandler(this.button5_Click);
-			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(104, 433);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(47, 20);
-			this.textBox1.TabIndex = 12;
-			this.textBox1.Text = "0";
-			// 
-			// Form1
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(852, 561);
-			this.Controls.Add(this.splitContainer1);
-			this.Name = "Form1";
-			this.Text = "Form1";
-			this.splitContainer1.Panel1.ResumeLayout(false);
-			this.splitContainer1.Panel2.ResumeLayout(false);
-			this.splitContainer1.Panel2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-			this.splitContainer1.ResumeLayout(false);
-			this.splitContainer2.Panel1.ResumeLayout(false);
-			this.splitContainer2.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-			this.splitContainer2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
-			this.ResumeLayout(false);
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.textBoxSy = new System.Windows.Forms.TextBox();
+            this.textBoxSx = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.textBoxDy = new System.Windows.Forms.TextBox();
+            this.textBoxDx = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonDistance = new System.Windows.Forms.Button();
+            this.buttonRotate = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbPolygon = new System.Windows.Forms.RadioButton();
+            this.rbEdge = new System.Windows.Forms.RadioButton();
+            this.rbPoint = new System.Windows.Forms.RadioButton();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.textBoxSy);
+            this.splitContainer1.Panel2.Controls.Add(this.textBoxSx);
+            this.splitContainer1.Panel2.Controls.Add(this.button7);
+            this.splitContainer1.Panel2.Controls.Add(this.textBoxDy);
+            this.splitContainer1.Panel2.Controls.Add(this.textBoxDx);
+            this.splitContainer1.Panel2.Controls.Add(this.button6);
+            this.splitContainer1.Panel2.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.button5);
+            this.splitContainer1.Panel2.Controls.Add(this.button4);
+            this.splitContainer1.Panel2.Controls.Add(this.button3);
+            this.splitContainer1.Panel2.Controls.Add(this.label3);
+            this.splitContainer1.Panel2.Controls.Add(this.label2);
+            this.splitContainer1.Panel2.Controls.Add(this.button2);
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.buttonDistance);
+            this.splitContainer1.Panel2.Controls.Add(this.buttonRotate);
+            this.splitContainer1.Panel2.Controls.Add(this.button1);
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
+            this.splitContainer1.Size = new System.Drawing.Size(852, 561);
+            this.splitContainer1.SplitterDistance = 627;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.IsSplitterFixed = true;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.treeView1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.pictureBox1);
+            this.splitContainer2.Size = new System.Drawing.Size(627, 561);
+            this.splitContainer2.SplitterDistance = 220;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(220, 561);
+            this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(403, 561);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            // 
+            // textBoxSy
+            // 
+            this.textBoxSy.Enabled = false;
+            this.textBoxSy.Location = new System.Drawing.Point(153, 492);
+            this.textBoxSy.Name = "textBoxSy";
+            this.textBoxSy.Size = new System.Drawing.Size(43, 20);
+            this.textBoxSy.TabIndex = 18;
+            this.textBoxSy.Text = "1";
+            this.textBoxSy.Click += new System.EventHandler(this.SelectAll);
+            // 
+            // textBoxSx
+            // 
+            this.textBoxSx.Enabled = false;
+            this.textBoxSx.Location = new System.Drawing.Point(104, 492);
+            this.textBoxSx.Name = "textBoxSx";
+            this.textBoxSx.Size = new System.Drawing.Size(43, 20);
+            this.textBoxSx.TabIndex = 17;
+            this.textBoxSx.Text = "1";
+            this.textBoxSx.Click += new System.EventHandler(this.SelectAll);
+            // 
+            // button7
+            // 
+            this.button7.Enabled = false;
+            this.button7.Location = new System.Drawing.Point(13, 490);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(85, 23);
+            this.button7.TabIndex = 16;
+            this.button7.Text = "Растянуть на";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // textBoxDy
+            // 
+            this.textBoxDy.Enabled = false;
+            this.textBoxDy.Location = new System.Drawing.Point(153, 462);
+            this.textBoxDy.Name = "textBoxDy";
+            this.textBoxDy.Size = new System.Drawing.Size(43, 20);
+            this.textBoxDy.TabIndex = 15;
+            this.textBoxDy.Text = "0";
+            this.textBoxDy.Click += new System.EventHandler(this.SelectAll);
+            // 
+            // textBoxDx
+            // 
+            this.textBoxDx.Enabled = false;
+            this.textBoxDx.Location = new System.Drawing.Point(104, 462);
+            this.textBoxDx.Name = "textBoxDx";
+            this.textBoxDx.Size = new System.Drawing.Size(43, 20);
+            this.textBoxDx.TabIndex = 14;
+            this.textBoxDx.Text = "0";
+            this.textBoxDx.Click += new System.EventHandler(this.SelectAll);
+            // 
+            // button6
+            // 
+            this.button6.Enabled = false;
+            this.button6.Location = new System.Drawing.Point(13, 460);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(85, 23);
+            this.button6.TabIndex = 13;
+            this.button6.Text = "Сдвинуть на";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(104, 433);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(47, 20);
+            this.textBox1.TabIndex = 12;
+            this.textBox1.Text = "0";
+            this.textBox1.Click += new System.EventHandler(this.SelectAll);
+            // 
+            // button5
+            // 
+            this.button5.Enabled = false;
+            this.button5.Location = new System.Drawing.Point(13, 430);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(85, 23);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "Повернуть на";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(13, 359);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(138, 23);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Метод лучей";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(13, 330);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(138, 23);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Метод углов";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 314);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(177, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Принадлежность точки полигону:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 248);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(166, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Точка пересечения двух ребер:";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(10, 264);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(138, 26);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Найти";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 209);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "label1";
+            // 
+            // buttonDistance
+            // 
+            this.buttonDistance.Enabled = false;
+            this.buttonDistance.Location = new System.Drawing.Point(10, 179);
+            this.buttonDistance.Name = "buttonDistance";
+            this.buttonDistance.Size = new System.Drawing.Size(138, 23);
+            this.buttonDistance.TabIndex = 4;
+            this.buttonDistance.Text = "Расстояние до";
+            this.buttonDistance.UseVisualStyleBackColor = true;
+            this.buttonDistance.Click += new System.EventHandler(this.buttonDistance_Click);
+            // 
+            // buttonRotate
+            // 
+            this.buttonRotate.Enabled = false;
+            this.buttonRotate.Location = new System.Drawing.Point(10, 149);
+            this.buttonRotate.Name = "buttonRotate";
+            this.buttonRotate.Size = new System.Drawing.Size(138, 23);
+            this.buttonRotate.TabIndex = 3;
+            this.buttonRotate.Text = "Развернуть";
+            this.buttonRotate.UseVisualStyleBackColor = true;
+            this.buttonRotate.Click += new System.EventHandler(this.buttonRotate_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(10, 119);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Новый многоугольник";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbPolygon);
+            this.groupBox1.Controls.Add(this.rbEdge);
+            this.groupBox1.Controls.Add(this.rbPoint);
+            this.groupBox1.Location = new System.Drawing.Point(4, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(172, 100);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Примитив";
+            // 
+            // rbPolygon
+            // 
+            this.rbPolygon.AutoSize = true;
+            this.rbPolygon.Location = new System.Drawing.Point(6, 67);
+            this.rbPolygon.Name = "rbPolygon";
+            this.rbPolygon.Size = new System.Drawing.Size(103, 17);
+            this.rbPolygon.TabIndex = 3;
+            this.rbPolygon.Text = "Многоугольник";
+            this.rbPolygon.UseVisualStyleBackColor = true;
+            this.rbPolygon.CheckedChanged += new System.EventHandler(this.rbPolygon_CheckedChanged);
+            // 
+            // rbEdge
+            // 
+            this.rbEdge.AutoSize = true;
+            this.rbEdge.Location = new System.Drawing.Point(6, 43);
+            this.rbEdge.Name = "rbEdge";
+            this.rbEdge.Size = new System.Drawing.Size(68, 17);
+            this.rbEdge.TabIndex = 2;
+            this.rbEdge.TabStop = true;
+            this.rbEdge.Text = "Отрезок";
+            this.rbEdge.UseVisualStyleBackColor = true;
+            // 
+            // rbPoint
+            // 
+            this.rbPoint.AutoSize = true;
+            this.rbPoint.Checked = true;
+            this.rbPoint.Location = new System.Drawing.Point(6, 19);
+            this.rbPoint.Name = "rbPoint";
+            this.rbPoint.Size = new System.Drawing.Size(55, 17);
+            this.rbPoint.TabIndex = 1;
+            this.rbPoint.TabStop = true;
+            this.rbPoint.Text = "Точка";
+            this.rbPoint.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(852, 561);
+            this.Controls.Add(this.splitContainer1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.ResumeLayout(false);
 
         }
 
@@ -329,6 +406,12 @@ namespace affine_transformations
 		private TextBox textBox1;
 		private Button button5;
 		private Button button4;
-	}
+        private TextBox textBoxDy;
+        private TextBox textBoxDx;
+        private Button button6;
+        private TextBox textBoxSy;
+        private TextBox textBoxSx;
+        private Button button7;
+    }
 }
 
